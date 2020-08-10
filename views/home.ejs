@@ -1,0 +1,29 @@
+
+
+<head>
+    <title><%=title%></title>
+</head>
+
+<form action="/task/create" method="POST">
+    <input type="text" name="desc" placeholder="What do you need" required>
+    <select name="category" id="category" required>
+        <option value="Personal">Personal</option>
+        <option value="Work">Work</option>
+        <option value="School">School</option>
+        <option value="Cleaning">Cleaning</option>
+        <option value="Others">Others</option>
+    </select>
+    <input type="date" id="date" name="Date" required>
+    <button type="submit">Submit</button>
+</form>
+
+
+<ol>
+    <%for(let i of tasks){%>
+        <li>
+            <small><%=i.desc%></small>
+            <small><%=i.category%></small>
+            <small><%=i.date%></small>
+        </li>
+    <%}%>
+</ol>
