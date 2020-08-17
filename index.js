@@ -6,6 +6,12 @@ const Todo=require('./model/toDoApp');
 
 
 app.use(express.urlencoded());
+app.use(express.static('./assets'))
+
+//extract syles and scripts from sub pages in layout
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
+
 //for the template engine
 app.set('view engine','ejs');
 app.set('views','./views');

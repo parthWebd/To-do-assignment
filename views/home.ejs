@@ -1,30 +1,91 @@
-
-
 <head>
     <title><%=title%></title>
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://kit.fontawesome.com/f19d67c548.js" crossorigin="anonymous"></script>
 </head>
 
-<form action="/task/create" method="POST">
-    <input type="text" name="desc" placeholder="What do you need" required>
-    <select name="category" id="category" required>
-        <option value="Personal">Personal</option>
-        <option value="Work">Work</option>
-        <option value="School">School</option>
-        <option value="Cleaning">Cleaning</option>
-        <option value="Others">Others</option>
-    </select>
-    <input type="date" id="date" name="Date" required>
-    <button type="submit">Submit</button>
-</form>
+<div id="container">
+    <form action="/task/create" method="POST">
+        <div id="cont-desc">
+            <div id="cont-desc-head" class="head">Description</div>
+            <div id="cont-desc-body" class="body">
+                <input type="text" name="desc" placeholder="What do you need" required> 
+            </div> 
+        </div>
+        <div id="sec">
+            <div id="sec-cat">
+                <div id="sec-cat-head" class="head">Category</div>
+                <div id="sec-cat-body" class="body">
+                    <select name="category" id="category" required>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="School">School</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+            <div id="sec-date">
+                <div id="sec-date-head" class="head">
+                    Date
+                </div>
+                <div id="sec-date-body" class="body">
+                    <input type="date" id="date" name="Date" required>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" id="add" type="submit" style="box-sizing: border-box;"><i class="fa fa-plus" aria-hidden="true"></i><span style="margin-left: 10px;">Add Task</span></button>
+    </form>
+    
+    
+    
+        
+    <form action="/task/delete" method="post">
+        <button class="btn" id="select" type="submit" style="box-sizing: border-box;"><i class="fa fa-trash-o" aria-hidden="true"></i><span style="margin-left: 10px;">Delete Tasks</span></button>
+        
+        <div id="res-cont">
+            <%for(let i of tasks){%>
+                <div id="res-cont-one">
+                    <div class="res-cont-top" >
+                        <div id="check-desc">
+                            <div class="top-check">
+                                <input type="checkbox" name="task" id="task<%= i._id%>" value="<%=i._id%>">
+                            </div>
+    
+                            <div class="top-desc">
+                                <label for="task<%= i._id%>">
+                                <%=i.desc%>
+                            </div>
+                        </div>
+                        
+                        <div class="bot-date">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <% var st=i.date.toString().substring(4,15); %>
+                            <%=st%>
+                        </div>
+
+                    </div>
+                    <div  class="res-cont-bottom">
+                        <div class="bot-cat">
+                            <%=i.category%>
+                        </div>
+                    </div>
+
+                </label>
+                <br>
+                </div>
+            <%}%>
+        </div>
+        
+        
+    </form>
+</div>
 
 
-<ol>
-    <%for(let i of tasks){%>
-        <li>
-            <small><%=i.desc%></small>
-            <small><%=i.category%></small>
-            <small><%=i.date%></small>
-            <small><button><a href="/task/delete/<%=i._id%>">Delete</a></button></small>
-        </li>
-    <%}%>
-</ol>
+
+    
+    
+
